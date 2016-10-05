@@ -230,7 +230,7 @@ public class Player : MonoBehaviour
 
     private bool isThereACieling()
     {
-        return Physics2D.OverlapArea(new Vector2(transform.position.x + box.bounds.extents.x - .1f, transform.position.y + 0.2f + box.bounds.size.y*2),
+        return Physics2D.OverlapArea(new Vector2(transform.position.x + box.bounds.extents.x - .1f, transform.position.y + box.bounds.size.y*2),
                                      new Vector2(transform.position.x - box.bounds.extents.x + .1f, transform.position.y + box.bounds.size.y),
                                      whatIsGround);
     }
@@ -238,9 +238,9 @@ public class Player : MonoBehaviour
 
     private bool isThereAWall()
     {
-        return isfacingRight ? Physics2D.OverlapArea(new Vector2(transform.position.x + box.bounds.extents.x - 0.06f, transform.position.y + 0.1f + box.bounds.size.y),
+        return isfacingRight ? Physics2D.OverlapArea(new Vector2(transform.position.x + box.bounds.extents.x - 0.06f, transform.position.y + box.bounds.size.y),
                           new Vector2(transform.position.x + box.bounds.extents.x + 0.06f, transform.position.y + 0.02f), whatIsGround) :
-                          Physics2D.OverlapArea(new Vector2(transform.position.x - box.bounds.extents.x - 0.06f, transform.position.y + 0.1f + box.bounds.size.y),
+                          Physics2D.OverlapArea(new Vector2(transform.position.x - box.bounds.extents.x - 0.06f, transform.position.y + box.bounds.size.y),
                                      new Vector2(transform.position.x - box.bounds.extents.x + 0.06f, transform.position.y + 0.02f), whatIsGround);
     }
 
@@ -315,7 +315,7 @@ public class Player : MonoBehaviour
             {
                 StartCoroutine(Slide(0.4f));
             }
-            if (!grounded && !isThereAWall() && Input.GetAxis("Glide") > 0 && !pressedGlide)
+            if (!grounded && !isThereAWall() && !climbing && Input.GetAxis("Glide") > 0 && !pressedGlide)
             {
                 pressedGlide = true;
                 StartCoroutine(Glide());
